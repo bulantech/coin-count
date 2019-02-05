@@ -145,6 +145,9 @@ void setup()
   
   Serial.begin(9600);  //กำหนดช่องความถี่ในการเชื่อมต่อกับ Serial เพื่อดูค่าต่างๆที่รับได้
   pinMode(CounterSensor_Pin1, INPUT);
+  pinMode(CounterSensor_Pin2, INPUT);
+  pinMode(CounterSensor_Pin3, INPUT);
+  pinMode(CounterSensor_Pin10, INPUT);
   
   Serial.println("");
   Serial.println("Setup port");
