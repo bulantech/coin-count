@@ -1,3 +1,8 @@
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27,20,4);  // or 0x3F set the LCD address to 0x27 for a 20 chars and 4 line display
+
 // กำหนดขารับเหรียญ
 int CounterSensor_Pin1 = 5;
 int CounterSensor_Pin2 = 6;
@@ -19,6 +24,12 @@ int count10 = 0;
 // ตัวแปรจำนวนเงินทั้งหมด
 int Sum_Bath = 0;
 
+// lcd line string
+String line1 = "---- COIN COUTER ---";
+String line2 = "";
+String line3 = "";
+String line4 = "--------------------";
+
 void check1coin()
 {
   int sensor_Value1 = digitalRead(CounterSensor_Pin1);  //สร้างตัวแปรชื่อ sensor_Value ชนิด int ให้เก็บค่าดิจิตอลที่รับได้จาก CounterSensor_Pin
@@ -29,17 +40,27 @@ void check1coin()
     {
       flag1 = 1;  
       count1++;  //ให้เพิ่มค่าใน Count ขึ้น 1 ค่า หรือ Count = Count + 1
+      Sum_Bath = Sum_Bath + 1;
+      
+      line2 = "";
+      line2 += "1 Baht = ";
+      line2 += String(count1, DEC);
+      line2 += " Coin";
+      
+      line3 = "";
+      line3 += "Sum Baht = ";
+      line3 += String(Sum_Bath, DEC);
+      line3 += " Baht";
+
+      lcd.clear(); //clear lcd
+      lcd.setCursor(1,0); //ser curcer to lcd line 2
+      lcd.print(line2); // print string to lcd line2
+      lcd.setCursor(2,0);
+      lcd.print(line3);
       
       Serial.println("");
-      Serial.print("Count 1 Bath = ");  //แสดงค่าออกทาง Serial Monitor ว่า "Count = "
-      Serial.print(count1);  //แสดงค่าใน Count 
-      Serial.println(" Coin");  //แสดงค่าออกทาง Serial Monitor ว่า " Coin" จากนั้นขึ้นบรรทัดใหม่
-
-      Sum_Bath = Sum_Bath + 1;   //ให้ตัวแปร Sum_Bath เก็บจำนวนเงินรวมโดยมาจากสูตร "จำนวนเงินรวม = จำนวนเหรียญ x ชนิดของเหรียญ"
-      Serial.print("Sum Bath = ");  //แสดงค่าออกทาง Serial Monitor ว่า "Sum Bath = "
-      Serial.print(Sum_Bath);  //แสดงค่าใน Sum_Bath 
-      Serial.println(" Bath");  //แสดงค่าออกทาง Serial Monitor ว่า " Bath" จากนั้นขึ้นบรรทัดใหม่
-
+      Serial.println(line2);
+      Serial.println(line3);
     }
   }
   else
@@ -59,18 +80,29 @@ void check2coin()
     {
       flag2 = 1;  
       count2++;  //ให้เพิ่มค่าใน Count ขึ้น 1 ค่า หรือ Count = Count + 1
+      Sum_Bath = Sum_Bath + 2;
+      
+      line2 = "";
+      line2 += "2 Baht = ";
+      line2 += String(count2, DEC);
+      line2 += " Coin";
+      
+      line3 = "";
+      line3 += "Sum Baht = ";
+      line3 += String(Sum_Bath, DEC);
+      line3 += " Baht";
+
+      lcd.clear(); //clear lcd
+      lcd.setCursor(1,0); //ser curcer to lcd line 2
+      lcd.print(line2); // print string to lcd line2
+      lcd.setCursor(2,0);
+      lcd.print(line3);
       
       Serial.println("");
-      Serial.print("Count 2 Bath = ");  //แสดงค่าออกทาง Serial Monitor ว่า "Count = "
-      Serial.print(count2);  //แสดงค่าใน Count 
-      Serial.println(" Coin");  //แสดงค่าออกทาง Serial Monitor ว่า " Coin" จากนั้นขึ้นบรรทัดใหม่
-
-      Sum_Bath = Sum_Bath + 2;   //ให้ตัวแปร Sum_Bath เก็บจำนวนเงินรวมโดยมาจากสูตร "จำนวนเงินรวม = จำนวนเหรียญ x ชนิดของเหรียญ"
-      Serial.print("Sum Bath = ");  //แสดงค่าออกทาง Serial Monitor ว่า "Sum Bath = "
-      Serial.print(Sum_Bath);  //แสดงค่าใน Sum_Bath 
-      Serial.println(" Bath");  //แสดงค่าออกทาง Serial Monitor ว่า " Bath" จากนั้นขึ้นบรรทัดใหม่
-
+      Serial.println(line2);
+      Serial.println(line3);
     }
+  }
   }
   else
   {
@@ -89,18 +121,29 @@ void check5coin()
     {
       flag5 = 1;  
       count5++;  //ให้เพิ่มค่าใน Count ขึ้น 1 ค่า หรือ Count = Count + 1
+      Sum_Bath = Sum_Bath + 5;
+      
+      line2 = "";
+      line2 += "5 Baht = ";
+      line2 += String(count5, DEC);
+      line2 += " Coin";
+      
+      line3 = "";
+      line3 += "Sum Baht = ";
+      line3 += String(Sum_Bath, DEC);
+      line3 += " Baht";
+
+      lcd.clear(); //clear lcd
+      lcd.setCursor(1,0); //ser curcer to lcd line 2
+      lcd.print(line2); // print string to lcd line2
+      lcd.setCursor(2,0);
+      lcd.print(line3);
       
       Serial.println("");
-      Serial.print("Count 5 Bath = ");  //แสดงค่าออกทาง Serial Monitor ว่า "Count = "
-      Serial.print(count5);  //แสดงค่าใน Count 
-      Serial.println(" Coin");  //แสดงค่าออกทาง Serial Monitor ว่า " Coin" จากนั้นขึ้นบรรทัดใหม่
-
-      Sum_Bath = Sum_Bath + 5;   //ให้ตัวแปร Sum_Bath เก็บจำนวนเงินรวมโดยมาจากสูตร "จำนวนเงินรวม = จำนวนเหรียญ x ชนิดของเหรียญ"
-      Serial.print("Sum Bath = ");  //แสดงค่าออกทาง Serial Monitor ว่า "Sum Bath = "
-      Serial.print(Sum_Bath);  //แสดงค่าใน Sum_Bath 
-      Serial.println(" Bath");  //แสดงค่าออกทาง Serial Monitor ว่า " Bath" จากนั้นขึ้นบรรทัดใหม่
-
+      Serial.println(line2);
+      Serial.println(line3);
     }
+  }
   }
   else
   {
@@ -117,20 +160,31 @@ void check10coin()
     digitalWrite(13, HIGH); // led ติดเมื่อเหรียญเข้า
     if(!flag10) // ถ้าเหรียญนังไม่เคยเข้า 
     {
-      flag5 = 10;  
+      flag10 = 1;  
       count10++;  //ให้เพิ่มค่าใน Count ขึ้น 1 ค่า หรือ Count = Count + 1
+      Sum_Bath = Sum_Bath + 10;
+      
+      line2 = "";
+      line2 += "10 Baht = ";
+      line2 += String(count10, DEC);
+      line2 += " Coin";
+      
+      line3 = "";
+      line3 += "Sum Baht = ";
+      line3 += String(Sum_Bath, DEC);
+      line3 += " Baht";
+
+      lcd.clear(); //clear lcd
+      lcd.setCursor(1,0); //ser curcer to lcd line 2
+      lcd.print(line2); // print string to lcd line2
+      lcd.setCursor(2,0);
+      lcd.print(line3);
       
       Serial.println("");
-      Serial.print("Count 10 Bath = ");  //แสดงค่าออกทาง Serial Monitor ว่า "Count = "
-      Serial.print(count10);  //แสดงค่าใน Count 
-      Serial.println(" Coin");  //แสดงค่าออกทาง Serial Monitor ว่า " Coin" จากนั้นขึ้นบรรทัดใหม่
-
-      Sum_Bath = Sum_Bath + 10;   //ให้ตัวแปร Sum_Bath เก็บจำนวนเงินรวมโดยมาจากสูตร "จำนวนเงินรวม = จำนวนเหรียญ x ชนิดของเหรียญ"
-      Serial.print("Sum Bath = ");  //แสดงค่าออกทาง Serial Monitor ว่า "Sum Bath = "
-      Serial.print(Sum_Bath);  //แสดงค่าใน Sum_Bath 
-      Serial.println(" Bath");  //แสดงค่าออกทาง Serial Monitor ว่า " Bath" จากนั้นขึ้นบรรทัดใหม่
-
+      Serial.println(line2);
+      Serial.println(line3);
     }
+  }
   }
   else
   {
@@ -151,6 +205,21 @@ void setup()
   
   Serial.println("");
   Serial.println("Setup port");
+
+  lcd.init();                      // initialize the lcd 
+  lcd.init();
+  // Print a message to the LCD.
+  lcd.backlight();
+  lcd.setCursor(0,0);
+  lcd.print(line1);
+  lcd.setCursor(1,0);
+  lcd.print(line2);
+  lcd.setCursor(2,0);
+  lcd.print(line3);
+  lcd.setCursor(3,0);
+  lcd.print(line4);
+
+}
   
 }
 
