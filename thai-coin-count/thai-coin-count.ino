@@ -103,7 +103,6 @@ void check2coin()
       Serial.println(line3);
     }
   }
-  }
   else
   {
     digitalWrite(13, LOW); // led ติดเมื่อเหรียญออก
@@ -143,7 +142,6 @@ void check5coin()
       Serial.println(line2);
       Serial.println(line3);
     }
-  }
   }
   else
   {
@@ -185,7 +183,6 @@ void check10coin()
       Serial.println(line3);
     }
   }
-  }
   else
   {
     digitalWrite(13, LOW); // led ติดเมื่อเหรียญออก
@@ -200,14 +197,14 @@ void setup()
   Serial.begin(9600);  //กำหนดช่องความถี่ในการเชื่อมต่อกับ Serial เพื่อดูค่าต่างๆที่รับได้
   pinMode(CounterSensor_Pin1, INPUT);
   pinMode(CounterSensor_Pin2, INPUT);
-  pinMode(CounterSensor_Pin3, INPUT);
+  pinMode(CounterSensor_Pin5, INPUT);
   pinMode(CounterSensor_Pin10, INPUT);
   
   Serial.println("");
   Serial.println("Setup port");
 
   lcd.init();                      // initialize the lcd 
-  lcd.init();
+
   // Print a message to the LCD.
   lcd.backlight();
   lcd.setCursor(0,0);
@@ -217,10 +214,7 @@ void setup()
   lcd.setCursor(2,0);
   lcd.print(line3);
   lcd.setCursor(3,0);
-  lcd.print(line4);
-
-}
-  
+  lcd.print(line4); 
 }
 
 void loop()
